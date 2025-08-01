@@ -1,14 +1,26 @@
-<h2>Login</h2>
-<form (ngSubmit)="login()">
-  <input [(ngModel)]="username" name="username" placeholder="Username" />
-  <input
-    [(ngModel)]="password"
-    name="password"
-    type="password"
-    placeholder="Password"
-  />
-  <button type="submit">Login</button>
-  @if (error) {
-      <p style="color: red">{{ error }}</p>
-  }
-</form>
+<div class="login-wrapper">
+  <form class="login-form" (ngSubmit)="login()">
+    <h2>Login</h2>
+
+    <input
+      [(ngModel)]="username"
+      name="username"
+      placeholder="Username"
+      required
+    />
+
+    <input
+      [(ngModel)]="password"
+      name="password"
+      type="password"
+      placeholder="Password"
+      required
+    />
+
+    <button type="submit">Login</button>
+
+    @if (error) {
+    <p class="error-message">{{ error }}</p>
+    }
+  </form>
+</div>

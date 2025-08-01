@@ -1,0 +1,31 @@
+.unauthorized-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.unauthorized-image {
+  margin-bottom: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+h2 {
+  color: #c0392b;
+}
+
+.back-link {
+  margin-top: 1.5rem;
+  color: #3498db;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
