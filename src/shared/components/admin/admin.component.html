@@ -1,1 +1,19 @@
-<p>admin works!</p>
+<h2>Admin Panel</h2>
+<input [(ngModel)]="newProductName" placeholder="Product name" />
+<input [(ngModel)]="newProductPrice" type="number" placeholder="Price" />
+<button (click)="addProduct()">Add</button>
+
+<ul>
+  @for (product of products; track $index) {
+  <li>
+    <input type="text" #nameInput [value]="product.name" />
+    <input type="number" #priceInput [value]="product.price" />
+    <button
+      (click)="updateProduct(product.id, nameInput.value, priceInput.value)"
+    >
+      Update
+    </button>
+    <button (click)="deleteProduct(product.id)">Delete</button>
+  </li>
+  }
+</ul>

@@ -1,0 +1,34 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Soda",
+      "price": 1.5
+    },
+    {
+      "id": "2",
+      "name": "Chips",
+      "price": 2
+    },
+    {
+      "id": "3",
+      "name": "Candy",
+      "price": 1
+    },
+    {
+      "id": "4",
+      "name": "Juice",
+      "price": 2.5
+    },
+    {
+      "id": "5",
+      "name": "Water",
+      "price": 1
+    },
+    {
+      "id": "9303",
+      "name": "pepsi",
+      "price": 2.3
+    }
+  ]
+}

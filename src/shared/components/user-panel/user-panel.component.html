@@ -1,1 +1,8 @@
-<p>user-panel works!</p>
+<h2>Available Products</h2>
+<ul>
+    @for (product of products; track $index) {
+        <li>
+          {{ product.name }} - ${{ product.price }}
+        </li>
+    }
+</ul>
