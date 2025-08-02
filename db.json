@@ -3,7 +3,7 @@
     {
       "id": "1",
       "name": "Soda",
-      "price": 2,
+      "price": 6,
       "quantity": 12
     },
     {
@@ -22,7 +22,7 @@
       "id": "4",
       "name": "Juice",
       "price": 2.5,
-      "quantity": 10
+      "quantity": 12
     },
     {
       "id": "5",
@@ -53,6 +53,18 @@
       "name": "Fanta",
       "price": 3,
       "quantity": 2
+    },
+    {
+      "id": "69ea",
+      "name": "candy",
+      "price": 2,
+      "quantity": 2
+    },
+    {
+      "id": "a785",
+      "name": "Bira",
+      "price": 44,
+      "quantity": 11
     }
   ]
 }

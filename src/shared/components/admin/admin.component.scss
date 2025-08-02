@@ -1,9 +1,100 @@
-.error-msg {
-  color: red;
-  font-size: 0.8rem;
-  margin-top: 2px;
+.admin-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.admin-card {
+  background: #fff;
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.admin-info {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+
+  ul {
+    margin: 0.5rem 0 0.5rem 1.2rem;
+    padding: 0;
+  }
+
+  em {
+    display: block;
+    margin-top: 0.5rem;
+    color: #c0392b;
+  }
+}
+
+.admin-form,
+.product-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
 }
 
 input.ng-invalid.ng-touched {
-  border: 1px solid red;
+  border-color: #e74c3c;
+}
+
+button {
+  padding: 0.5rem 0.75rem;
+  border: none;
+  background-color: #3498db;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  width: fit-content;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button.delete-btn {
+  background-color: #e74c3c;
+}
+
+.error-msg {
+  color: #e74c3c;
+  font-size: 0.8rem;
+}
+
+.product-list {
+  list-style: none;
+  padding: 0;
+}
+
+.product-item {
+  border: 1px solid #eee;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.button-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
 }
