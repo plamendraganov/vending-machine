@@ -3,6 +3,7 @@ import { Product } from '../../models/product.interface';
 import { ProductService } from '../../services/product.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-user-panel',
@@ -26,18 +27,60 @@ export class UserPanelComponent {
     { label: '€2', value: 2.0, img: 'assets/coins/2_euro.png' },
   ];
 
-  constructor(private productService: ProductService) {
+  constructor(
+    private productService: ProductService,
+    private snackbarService: SnackbarService
+  ) {
+    this.loadProducts();
+  }
+
+  loadProducts() {
     this.productService.getProducts().subscribe((p) => (this.products = p));
   }
 
   insertCoin(value: number) {
     this.insertedAmount += value;
-    this.insertedAmount = parseFloat(this.insertedAmount.toFixed(2)); // clean up rounding
+    this.insertedAmount = parseFloat(this.insertedAmount.toFixed(2));
   }
 
   resetInsertedMoney() {
-    // Optionally, show a message to the user about the returned amount
-    alert(`Returned €${this.insertedAmount.toFixed(2)}`);
+    this.snackbarService.showSuccess(
+      `Returned €${this.insertedAmount.toFixed(2)}`
+    );
+
     this.insertedAmount = 0;
+  }
+
+  buyProduct(product: Product) {
+    if (product.price > this.insertedAmount) {
+      this.snackbarService.showError('Not enough money inserted.');
+      return;
+    }
+
+    if (product.quantity === 0) return;
+
+    const updatedProduct = {
+      ...product,
+      quantity: product.quantity - 1,
+    };
+
+    this.productService
+      .updateProduct(product.id, updatedProduct)
+      .subscribe(() => {
+
+        const cashback = this.insertedAmount - product.price;
+
+        let message = `You can take your ${product.name}`;
+
+        if (cashback > 0) {
+          message += ` and your cashback of $${cashback.toFixed(2)}`;
+        }
+
+        this.snackbarService.showSuccess(message);
+
+        this.insertedAmount = 0;
+
+        this.loadProducts();
+      });
   }
 }

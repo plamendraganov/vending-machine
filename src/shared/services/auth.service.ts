@@ -8,7 +8,6 @@ export class AuthService {
   constructor(private router: Router) {}
 
   login(username: string, password: string): boolean {
-    // Fake login logic
     if (username === 'admin' && password === 'admin') {
       this.setUser({ username, role: 'admin' });
       return true;

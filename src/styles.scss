@@ -27,4 +27,28 @@ body {
     background-color: #3b82f6;
     color: #ffffff;
   }
+
+  .snackbar-success {
+    .mdc-snackbar__surface.mat-mdc-snackbar-surface {
+      background-color: #4caf50 !important;
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    .mdc-button__label {
+      color: #ffffff;
+    }
+  }
+
+  .snackbar-error {
+    .mdc-snackbar__surface.mat-mdc-snackbar-surface {
+      background-color: #f44336 !important;
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    .mdc-button__label {
+      color: #ffffff;
+    }
+  }
 }

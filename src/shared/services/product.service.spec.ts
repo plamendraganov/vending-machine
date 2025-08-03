@@ -85,6 +85,6 @@ describe('ProductService', () => {
 
     const req = httpMock.expectOne(`http://localhost:3000/products/${id}`);
     expect(req.request.method).toBe('DELETE');
-    req.flush(null); // simulate empty response
+    req.flush(null);
   });
 });
