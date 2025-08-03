@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Product } from '../../models/product.interface';
 import { ProductService } from '../../services/product.service';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,6 +13,9 @@ import { SnackbarService } from '../../services/snackbar.service';
   styleUrl: './user-panel.component.scss',
 })
 export class UserPanelComponent {
+  private productService = inject(ProductService);
+  private snackbarService = inject(SnackbarService);
+
   products: Product[] = [];
   insertedAmount: number = 0;
 
@@ -27,10 +30,7 @@ export class UserPanelComponent {
     { label: '€2', value: 2.0, img: 'assets/coins/2_euro.png' },
   ];
 
-  constructor(
-    private productService: ProductService,
-    private snackbarService: SnackbarService
-  ) {
+  constructor() {
     this.loadProducts();
   }
 

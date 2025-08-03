@@ -6,7 +6,7 @@ import {
   FormControl,
   AbstractControl,
 } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product.interface';
@@ -18,23 +18,25 @@ import { Router } from '@angular/router';
   selector: 'app-admin',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
-    MatButtonModule,
-  ],
+    MatButtonModule
+],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss',
 })
 export class AdminComponent {
+  private fb = inject(FormBuilder);
+  private productService = inject(ProductService);
+
   products: Product[] = [];
   productEdits: { [id: number]: FormGroup } = {};
   newProductForm: FormGroup;
 
    router = inject(Router);
 
-  constructor(private fb: FormBuilder, private productService: ProductService) {
+  constructor() {
     this.newProductForm = this.fb.group({
       name: ['', Validators.required],
       price: [null, [Validators.required, Validators.min(0.01)]],

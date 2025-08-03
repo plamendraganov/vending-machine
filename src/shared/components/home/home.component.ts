@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { UserPanelComponent } from '../user-panel/user-panel.component';
 import { Router } from '@angular/router';
@@ -11,10 +11,13 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
+  private auth = inject(AuthService);
+  private router = inject(Router);
+
   username: string = '';
   role: string = '';
 
-  constructor(private auth: AuthService, private router: Router) {
+  constructor() {
     const user = this.auth.getUser();
     if (user) {
       this.username = user.username;

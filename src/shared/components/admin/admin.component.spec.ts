@@ -16,8 +16,8 @@ describe('AdminComponent', () => {
   let mockProductService: jasmine.SpyObj<ProductService>;
 
   const mockProducts: Product[] = [
-    { id: 1, name: 'Coke', price: 1.5, quantity: 5 },
-    { id: 2, name: 'Pepsi', price: 1.2, quantity: 3 },
+    { id: 1, name: 'Coke', price: 1.5, quantity: 5, image: '' },
+    { id: 2, name: 'Pepsi', price: 1.2, quantity: 3, image: '' },
   ];
 
   beforeEach(async () => {
@@ -54,12 +54,13 @@ describe('AdminComponent', () => {
   it('should add product when form is valid', () => {
     mockProductService.getProducts.and.returnValue(of([]));
     mockProductService.addProduct.and.returnValue(
-      of({ id: 3, name: 'Fanta', price: 1.3, quantity: 6 })
+      of({ id: 3, name: 'Fanta', price: 1.3, quantity: 6, image: '' })
     );
     component.newProductForm.setValue({
       name: 'Fanta',
       price: 1.3,
       quantity: 6,
+      image: '',
     });
 
     component.addProduct();
@@ -68,6 +69,7 @@ describe('AdminComponent', () => {
       name: 'Fanta',
       price: 1.3,
       quantity: 6,
+      image: '',
     });
   });
 
@@ -76,6 +78,7 @@ describe('AdminComponent', () => {
       name: '',
       price: null,
       quantity: null,
+      image: '',
     });
 
     component.addProduct();
@@ -93,6 +96,7 @@ describe('AdminComponent', () => {
       name: 'Coke Zero',
       price: 1.4,
       quantity: 4,
+      image: '',
     });
 
     component.updateProduct(id);
@@ -101,6 +105,7 @@ describe('AdminComponent', () => {
       name: 'Coke Zero',
       price: 1.4,
       quantity: 4,
+      image: '',
     });
   });
 
@@ -112,6 +117,7 @@ describe('AdminComponent', () => {
       name: '',
       price: null,
       quantity: null,
+      image: '',
     });
 
     component.updateProduct(id);

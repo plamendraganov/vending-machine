@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
@@ -10,11 +10,12 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+  private auth = inject(AuthService);
+  private router = inject(Router);
+
   username = '';
   password = '';
   error = '';
-
-  constructor(private auth: AuthService, private router: Router) {}
 
   login() {
     const success = this.auth.login(this.username, this.password);

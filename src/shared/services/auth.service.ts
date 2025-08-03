@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly storageKey = 'auth_user';
+  private router = inject(Router);
 
-  constructor(private router: Router) {}
+  private readonly storageKey = 'auth_user';
 
   login(username: string, password: string): boolean {
     if (username === 'admin' && password === 'admin') {
