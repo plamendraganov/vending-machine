@@ -6,47 +6,190 @@
       As an administrator, you can:
       <ul>
         <li>Add new products</li>
-        <li>Update product <strong>name</strong>, <strong>price</strong>, or <strong>quantity</strong></li>
+        <li>
+          Update product <strong>name</strong>, <strong>price</strong>, or
+          <strong>quantity</strong>
+        </li>
         <li>Delete existing products</li>
       </ul>
       <em>Note: Quantity must be between 1 and 15.</em>
     </div>
 
-    <form [formGroup]="newProductForm" (ngSubmit)="addProduct()" class="admin-form">
+    <form
+      [formGroup]="newProductForm"
+      (ngSubmit)="addProduct()"
+      class="admin-form"
+    >
+      <input type="file" (change)="onImageSelected($event, newProductForm)" />
+
+      <!-- New Product Image Preview -->
+      <div *ngIf="newProductForm.get('image')?.value" class="image-row">
+        <img [src]="newProductForm.get('image')?.value" class="preview" />
+        <button
+          class="delete-btn small-icon-btn"
+          type="button"
+          (click)="clearImage(newProductForm)"
+          mat-icon-button
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+
       <input formControlName="name" placeholder="Product name" />
-      <div *ngIf="getControlError(newProductForm.get('name'), 'required')" class="error-msg">Name is required</div>
+      <div
+        *ngIf="getControlError(newProductForm.get('name'), 'required')"
+        class="error-msg"
+      >
+        Name is required
+      </div>
 
-      <input type="number" min="0.01" formControlName="price" placeholder="Price" />
-      <div *ngIf="getControlError(newProductForm.get('price'), 'required')" class="error-msg">Price is required</div>
-      <div *ngIf="getControlError(newProductForm.get('price'), 'min')" class="error-msg">Price must be at least 0.01</div>
+      <input
+        type="number"
+        min="0.01"
+        formControlName="price"
+        placeholder="Price"
+      />
+      <div
+        *ngIf="getControlError(newProductForm.get('price'), 'required')"
+        class="error-msg"
+      >
+        Price is required
+      </div>
+      <div
+        *ngIf="getControlError(newProductForm.get('price'), 'min')"
+        class="error-msg"
+      >
+        Price must be at least 0.01
+      </div>
 
-      <input type="number" formControlName="quantity" placeholder="Quantity" min="1" max="15" />
-      <div *ngIf="getControlError(newProductForm.get('quantity'), 'required')" class="error-msg">Quantity is required</div>
-      <div *ngIf="getControlError(newProductForm.get('quantity'), 'min')" class="error-msg">Quantity must be at least 1</div>
-      <div *ngIf="getControlError(newProductForm.get('quantity'), 'max')" class="error-msg">Quantity cannot exceed 15</div>
+      <input
+        type="number"
+        formControlName="quantity"
+        placeholder="Quantity"
+        min="1"
+        max="15"
+      />
+      <div
+        *ngIf="getControlError(newProductForm.get('quantity'), 'required')"
+        class="error-msg"
+      >
+        Quantity is required
+      </div>
+      <div
+        *ngIf="getControlError(newProductForm.get('quantity'), 'min')"
+        class="error-msg"
+      >
+        Quantity must be at least 1
+      </div>
+      <div
+        *ngIf="getControlError(newProductForm.get('quantity'), 'max')"
+        class="error-msg"
+      >
+        Quantity cannot exceed 15
+      </div>
 
-      <button type="submit" [disabled]="newProductForm.invalid">Add</button>
+      <button type="submit" [disabled]="newProductForm.invalid">
+        Add product
+      </button>
     </form>
+
+    @if (products.length) {
+    <h3>Already added products</h3>
+    }
 
     <ul class="product-list">
       @for (product of products; track $index) {
-        <li [formGroup]="productEdits[product.id]" class="product-item">
-          <input type="text" formControlName="name" />
-          <input type="number" formControlName="price" min="0.01" />
-          <input type="number" formControlName="quantity" min="1" max="15" />
+      <li [formGroup]="productEdits[product.id]" class="product-item">
+        <input
+          type="file"
+          (change)="onImageSelected($event, productEdits[product.id])"
+        />
 
-          <div *ngIf="getControlError(productEdits[product.id].get('name'), 'required')" class="error-msg">Name is required</div>
-          <div *ngIf="getControlError(productEdits[product.id].get('price'), 'required')" class="error-msg">Price is required</div>
-          <div *ngIf="getControlError(productEdits[product.id].get('price'), 'min')" class="error-msg">Price must be at least 0.01</div>
-          <div *ngIf="getControlError(productEdits[product.id].get('quantity'), 'required')" class="error-msg">Quantity is required</div>
-          <div *ngIf="getControlError(productEdits[product.id].get('quantity'), 'min')" class="error-msg">Quantity must be at least 1</div>
-          <div *ngIf="getControlError(productEdits[product.id].get('quantity'), 'max')" class="error-msg">Quantity cannot exceed 15</div>
+        <!-- Existing Product Image Preview -->
+        <div
+          *ngIf="productEdits[product.id].get('image')?.value"
+          class="image-row"
+        >
+          <img
+            [src]="productEdits[product.id].get('image')?.value"
+            class="preview"
+          />
+          <button
+            class="delete-btn small-icon-btn"
+            type="button"
+            (click)="clearImage(productEdits[product.id])"
+            mat-icon-button
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
 
-          <div class="button-row">
-            <button (click)="updateProduct(product.id)" [disabled]="productEdits[product.id].invalid">Update</button>
-            <button (click)="deleteProduct(product.id)" class="delete-btn">Delete</button>
-          </div>
-        </li>
+        <input type="text" formControlName="name" />
+        <input type="number" formControlName="price" min="0.01" />
+        <input type="number" formControlName="quantity" min="1" max="15" />
+
+        <div
+          *ngIf="
+            getControlError(productEdits[product.id].get('name'), 'required')
+          "
+          class="error-msg"
+        >
+          Name is required
+        </div>
+        <div
+          *ngIf="
+            getControlError(productEdits[product.id].get('price'), 'required')
+          "
+          class="error-msg"
+        >
+          Price is required
+        </div>
+        <div
+          *ngIf="getControlError(productEdits[product.id].get('price'), 'min')"
+          class="error-msg"
+        >
+          Price must be at least 0.01
+        </div>
+        <div
+          *ngIf="
+            getControlError(
+              productEdits[product.id].get('quantity'),
+              'required'
+            )
+          "
+          class="error-msg"
+        >
+          Quantity is required
+        </div>
+        <div
+          *ngIf="
+            getControlError(productEdits[product.id].get('quantity'), 'min')
+          "
+          class="error-msg"
+        >
+          Quantity must be at least 1
+        </div>
+        <div
+          *ngIf="
+            getControlError(productEdits[product.id].get('quantity'), 'max')
+          "
+          class="error-msg"
+        >
+          Quantity cannot exceed 15
+        </div>
+
+        <div class="button-row">
+          <button
+            (click)="updateProduct(product.id)"
+            [disabled]="productEdits[product.id].invalid"
+          >
+            Update
+          </button>
+          <button (click)="deleteProduct(product.id)" class="delete-btn">
+            Delete
+          </button>
+        </div>
+      </li>
       }
     </ul>
   </div>

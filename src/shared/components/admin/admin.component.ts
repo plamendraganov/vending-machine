@@ -10,11 +10,19 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product.interface';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    MatButtonModule,
+  ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss',
 })
@@ -31,6 +39,7 @@ export class AdminComponent {
         null,
         [Validators.required, Validators.min(1), Validators.max(15)],
       ],
+      image: [null],
     });
 
     this.loadProducts();
@@ -48,6 +57,7 @@ export class AdminComponent {
             product.quantity,
             [Validators.required, Validators.min(1), Validators.max(15)],
           ],
+          image: [product.image || null],
         });
       }
     });
@@ -65,12 +75,14 @@ export class AdminComponent {
       return;
     }
 
-    const { name, price, quantity } = this.newProductForm.value;
+    const { name, price, quantity, image } = this.newProductForm.value;
 
-    this.productService.addProduct({ name, price, quantity }).subscribe(() => {
-      this.newProductForm.reset();
-      this.loadProducts();
-    });
+    this.productService
+      .addProduct({ name, price, quantity, image })
+      .subscribe(() => {
+        this.newProductForm.reset();
+        this.loadProducts();
+      });
   }
 
   updateProduct(id: number) {
@@ -80,13 +92,29 @@ export class AdminComponent {
       return;
     }
 
-    const { name, price, quantity } = form.value;
+    const { name, price, quantity, image } = form.value;
     this.productService
-      .updateProduct(id, { name, price, quantity })
+      .updateProduct(id, { name, price, quantity, image })
       .subscribe(() => this.loadProducts());
   }
 
   deleteProduct(id: number) {
     this.productService.deleteProduct(id).subscribe(() => this.loadProducts());
+  }
+
+  onImageSelected(event: Event, form: FormGroup) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        form.get('image')?.setValue(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  clearImage(form: FormGroup) {
+    form.get('image')?.setValue(null);
   }
 }
