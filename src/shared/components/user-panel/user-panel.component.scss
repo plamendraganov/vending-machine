@@ -27,10 +27,9 @@
 }
 
 .product-img {
-  width: 100%;
-  max-width: 200px;
-  height: auto;
-  object-fit: contain;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
   margin-bottom: 1rem;
 }
 

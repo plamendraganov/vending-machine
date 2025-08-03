@@ -68,12 +68,12 @@ export class UserPanelComponent {
       .updateProduct(product.id, updatedProduct)
       .subscribe(() => {
 
-        const cashback = this.insertedAmount - product.price;
+        const returnChange = this.insertedAmount - product.price;
 
         let message = `You can take your ${product.name}`;
 
-        if (cashback > 0) {
-          message += ` and your cashback of $${cashback.toFixed(2)}`;
+        if (returnChange > 0) {
+          message += ` and your change of $${returnChange.toFixed(2)}`;
         }
 
         this.snackbarService.showSuccess(message);
