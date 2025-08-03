@@ -21,12 +21,6 @@ export const routes: Routes = [
     data: { role: 'admin' }
   },
   {
-    path: 'user',
-    component: UserPanelComponent,
-    canActivate: [AuthGuard],
-    data: { role: 'user' }
-  },
-  {
     path: 'unauthorized',
     component: UnauthorizedComponent
   },

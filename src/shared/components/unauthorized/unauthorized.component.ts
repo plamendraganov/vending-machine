@@ -14,4 +14,9 @@ export class UnauthorizedComponent {
     event.preventDefault();
     this.router.navigate(['/login']);
   }
+
+  goToHome(event: Event) {
+    event.preventDefault();
+    this.router.navigate(['/home']);
+  }
 }

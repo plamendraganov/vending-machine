@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -12,6 +12,7 @@ import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product.interface';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -30,6 +31,8 @@ export class AdminComponent {
   products: Product[] = [];
   productEdits: { [id: number]: FormGroup } = {};
   newProductForm: FormGroup;
+
+   router = inject(Router);
 
   constructor(private fb: FormBuilder, private productService: ProductService) {
     this.newProductForm = this.fb.group({
@@ -116,5 +119,9 @@ export class AdminComponent {
 
   clearImage(form: FormGroup) {
     form.get('image')?.setValue(null);
+  }
+
+  goToHome() {
+    this.router.navigate(['/home']);
   }
 }

@@ -88,9 +88,15 @@
         Quantity cannot exceed 15
       </div>
 
-      <button type="submit" [disabled]="newProductForm.invalid">
-        Add product
-      </button>
+      <div class="button-row">
+        <button type="submit" [disabled]="newProductForm.invalid">
+          Add product
+        </button>
+
+        <button mat-raised-button color="primary" (click)="goToHome()">
+          Go to Home
+        </button>
+      </div>
     </form>
 
     @if (products.length) {

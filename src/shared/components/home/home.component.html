@@ -1,4 +1,11 @@
 <div class="home-container">
-  <h1>Welcome, {{ username }}!</h1>
-  <p>Your role is: <strong>{{ role }}</strong></p>
+  @if (role === 'admin') {
+  <div class="admin-nav">
+    <button mat-raised-button color="primary" (click)="goToAdminPanel()">
+      Manage Products
+    </button>
+  </div>
+  }
+
+  <app-user-panel />
 </div>

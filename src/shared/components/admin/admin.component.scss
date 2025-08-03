@@ -130,4 +130,10 @@ button.delete-btn {
   button[mat-icon-button] {
     margin-left: 4px;
   }
+
+  .button-row {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
 }
