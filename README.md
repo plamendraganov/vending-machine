@@ -44,6 +44,8 @@ To install Angular CLI globally, run:
 ```bash
 npm install -g @angular/cli
 
+```
+
 ### 1. 🛠️ 1. Clone the Repository
 
 ```bash
