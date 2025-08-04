@@ -1,59 +1,100 @@
-# Vending
+# Vending Machine App
+
+A simple Angular-based vending machine simulation that allows users to insert coins, purchase drinks, and view/administer inventory.
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🚀 Features
+
+- 👥 **Role-Based Access**:
+
+  | Role  | Username | Password | Access                                  |
+  | ----- | -------- | -------- | --------------------------------------- |
+  | Admin | admin    | admin    | Full access to Admin Panel and features |
+  | User  | user     | user     | Can view and purchase products only     |
+
+- 🛒 **User Panel**: Insert coins and purchase available products.
+  The product price is in EURO and the accepted coin denominations are 1, 2, 5, 10, 20 and 50 cent, €1 and €2.
+  The vending machine return changes and the user can also reset the inserted amount of money and receive it back without purchasing.
+- 🔧 **Admin Panel**: Add, update, or delete products and can also insert coins and purchase available products
+
+- 📦 **Backend**: Powered by `json-server` to simulate a RESTful API
+
+- ✅ **Unit Tests**: Includes Karma-based unit testing for services and components
+
+- 🎯 **Responsive UI** built with Angular Material and responsive flexbox
+
+---
+
+## 🖥️ Getting Started
+
+### 1. 🛠️ 1. Clone the Repository
 
 ```bash
+git clone https://github.com/plamendraganov/vending-machine.git
+cd vending
+
+```
+
+### 2. 📦 Install Dependencies
+
+```bash install node modules by running the command
+npm install
+
+```
+
+### 3. 🗃️ Start the Mock JSON Server (for Product Data)
+
+```bash install json server globally
+npm install -g json-server
+
+```
+
+```bash run the mock API server
+json-server --watch db.json --port 3000
+
+```
+
+### 4. 🚀 Start the Angular Development Server
+
+```bash start the Angular development server
 ng serve
+
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### 5. 🌐 Open the App in Your Browser
 
-## Code scaffolding
+```open your browser and navigate to:
+http://localhost:4200
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### 6. 🔐 Login Instructions
 
-```bash
-ng generate --help
+```After you are presented with the login screen, you can access the application by typing the provided username and password (see them in the beginning of the README). For example:
+Username: admin
+Password: admin
+
 ```
 
-## Building
+### 7. (OPTIONAL) 🧪 Running Unit Tests
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
+```bash To execute unit tests (currently 36 unit tests are added) with the Karma test runner, use:
 ng test
+
 ```
 
-## Running end-to-end tests
+## 📂 Additional Information
 
-For end-to-end (e2e) testing, run:
+- 🖼️ **Sample Product Images**:  
+  For your convenience, you can find a collection of ready-to-use product images in the `public/assets/products` folder.  
+  These images can be used by the admin when creating or updating products in the Admin Panel.
 
-```bash
-ng e2e
-```
+- ✍️ **How to Use**:
+  When adding a new product, you need to add a product name, available quantity of the product (maximum 15 items of one product can be placed in the vending machine) and the price of the product. The product name, quantity and price fields are required. The price cannot be less than 0.01 cent and the quantity number cannot be negative. Field validation is added to guide you when adding product information. The product image is optional and can be ommited. In that case the application will insert a default product image informing the user that the product image is not available.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+When using the vending machine, the user can buy a product after inserting the needed amount of money. If the amount of money inserted into the machine is not enough, the 'Buy' button is disabled for the certain products. The vending machine returns change if the inserted amount of money is bigger than the price of the purchased product. The user can also return his/her inserted amount of money without purchasing by clicking on the 'Reset' button.
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+The 'Manage' button is visible only for users logged as admin and it navigates to the admin panel where the administartor can add, update or delete products.
