@@ -50,7 +50,7 @@ npm install -g @angular/cli
 
 ```bash
 git clone https://github.com/plamendraganov/vending-machine.git
-cd vending
+cd vending-machine
 
 ```
 
