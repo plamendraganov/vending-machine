@@ -73,7 +73,7 @@ export class UserPanelComponent {
         let message = `You can take your ${product.name}`;
 
         if (returnChange > 0) {
-          message += ` and your change of $${returnChange.toFixed(2)}`;
+          message += ` and your change of €${returnChange.toFixed(2)}`;
         }
 
         this.snackbarService.showSuccess(message);
