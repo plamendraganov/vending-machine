@@ -30,6 +30,20 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 ## 🖥️ Getting Started
 
+## ✅ Prerequisites
+
+Before running this project, make sure you have the following installed:
+
+| Tool        | Version | Installation Link                                 |
+|-------------|---------|---------------------------------------------------|
+| Node.js     | >= 18.x | https://nodejs.org/en/download                    |
+| Angular CLI | >= 17.x | https://www.npmjs.com/package/@angular/cli        |
+
+To install Angular CLI globally, run:
+
+```bash
+npm install -g @angular/cli
+
 ### 1. 🛠️ 1. Clone the Repository
 
 ```bash
