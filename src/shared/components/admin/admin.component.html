@@ -22,7 +22,6 @@
       >
       <input type="file" (change)="onImageSelected($event, newProductForm)" />
 
-      <!-- New Product Image Preview -->
       @if (newProductForm.get('image')?.value) {
         <div class="image-row">
           <img [src]="newProductForm.get('image')?.value" class="preview" />
@@ -73,6 +72,8 @@
           placeholder="Quantity"
           min="1"
           max="15"
+          step="1"
+          (keydown)="preventDecimal($event)"
           />
           @if (getControlError(newProductForm.get('quantity'), 'required')) {
             <div
@@ -119,7 +120,6 @@
                 (change)="onImageSelected($event, productEdits[product.id])"
                 />
 
-                <!-- Existing Product Image Preview -->
                 @if (productEdits[product.id].get('image')?.value) {
                   <div
                     class="image-row"
@@ -139,9 +139,9 @@
                     </div>
                   }
 
-                  <input type="text" formControlName="name" />
-                  <input type="number" formControlName="price" min="0.01" />
-                  <input type="number" formControlName="quantity" min="1" max="15" />
+                  <input type="text" placeholder="Product name" formControlName="name" />
+                  <input type="number" placeholder="Price" formControlName="price" min="0.01" />
+                  <input type="number" placeholder="Quantity" formControlName="quantity" min="1" max="15" step="1" (keydown)="preventDecimal($event)" />
 
                   @if (
                     getControlError(productEdits[product.id].get('name'), 'required')

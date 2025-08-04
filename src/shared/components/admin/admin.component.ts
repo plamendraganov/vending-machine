@@ -17,12 +17,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    MatIconModule,
-    MatButtonModule
-],
+  imports: [FormsModule, ReactiveFormsModule, MatIconModule, MatButtonModule],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss',
 })
@@ -34,7 +29,7 @@ export class AdminComponent {
   productEdits: { [id: number]: FormGroup } = {};
   newProductForm: FormGroup;
 
-   router = inject(Router);
+  router = inject(Router);
 
   constructor() {
     this.newProductForm = this.fb.group({
@@ -125,5 +120,11 @@ export class AdminComponent {
 
   goToHome() {
     this.router.navigate(['/home']);
+  }
+
+  preventDecimal(event: KeyboardEvent): void {
+    if (event.key === '.' || event.key === ',' || event.key === 'e') {
+      event.preventDefault();
+    }
   }
 }
